@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <head>
+        <meta charset="UTF-8">
+        <title>My Cart</title>
+    </head>
+    <body>
+        <h2 align="center">My Cart</h2>
+        {% if request.user.is_authenticated %}
+            <p align="center">
+                Hello! {{request.user}} Welcome back~
+            </p>
+            <a href="/products/">Product List</a>
+        {% else %}
+            <p>Hello! Guest!</p>
+        {% endif %}
+        <table class="table table-bordered table-striped">
+            <tr align="center">
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Edit</th>
+            </tr>
+            {% for list in cart_list %}
+            <tr valign="center">
+                <td align="left" valign="center">{{list.product_name}}</td>
+                <td align="right">$</td>
+                <td align="center">{{list.product_amount}}</td>
+                <td><a href="#" class="btn btn-danger">刪除</a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4">Total</td>
+            </tr>
+        </table>
+    </body>
+</html>
+{% endblock %}
